@@ -1,5 +1,39 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
+from django.contrib import messages
+from . forms import ProductForm
+from . models import Product
 
 # Create your views here.
 def productsList(request):
-    return render(request, 'products/products.html')
+    products = Product.objects.all()
+    context = {'products': products}
+    return render(request, 'products/products.html', context)
+
+def createProduct(request):
+    form = ProductForm()
+    if request.method == "POST":
+        form = ProductForm(request.POST)
+        if form.is_valid():
+            form.save()
+            messages.success(request, 'Product added successfully.')
+            return redirect('product-List')
+        else:
+            messages.error(request, 'Bad Request')    
+    context = {'form': form}
+    return render(request, 'products/product_form.html', context)  
+
+def viewProduct(request, pk):
+    product = Product.objects.get(id=pk)
+    category = product.category.all()
+    context = {'product': product, 'categorys': category}
+    return render(request, 'products/product_detail.html', context)
+
+def deleteProduct(request, pk):
+    product = Product.objects.get(id=pk)
+    if request.method == "POST":
+        product.delete()
+        messages.success(request, 'Product deleted successfully.')
+        return redirect('product-List')
+    context = {'obj': product}
+    return render(request, 'products/delete_product.html', context)    
+        

@@ -1,0 +1,33 @@
+{% extends 'index.html' %}
+
+{% block content %}
+<div class="container">
+    <h3 class="mt-4">View Product</h3>
+    <div class="row">
+        <div class="col">
+            <div class="card mb-3">
+                <div class="card-header">
+                    <a class="btn btn-sm btn-secondary" href="{% url 'product-List' %}">
+                        <i class="fas fa-angle-left me-1"></i>
+                        Back
+                    </a>    
+                </div>
+                <div class="card-body">
+                    <div>
+                        <h3>{{product.name}}</h3>
+                        {% for category in categorys %}
+                        <small class="text-primary"><u>{{category}}</u></small>
+                        {% endfor %}
+                        <p>Ratings: {{product.rating}}</p>
+                    </div>
+                    <div>
+                        <p>{{product.description}}</p>
+                        <h4 class="text-warning">&#8377; {{product.price}}</h4>
+                        <p>Stock: {{product.stock}}</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
