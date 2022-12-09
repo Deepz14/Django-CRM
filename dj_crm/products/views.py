@@ -10,15 +10,14 @@ def productsList(request):
     return render(request, 'products/products.html', context)
 
 def createProduct(request):
-    form = ProductForm()
     if request.method == "POST":
         form = ProductForm(request.POST)
         if form.is_valid():
             form.save()
             messages.success(request, 'Product added successfully.')
-            return redirect('product-List')
-        else:
-            messages.error(request, 'Bad Request')    
+            return redirect('product-List') 
+    else:
+        form = ProductForm()
     context = {'form': form}
     return render(request, 'products/product_form.html', context)  
 
