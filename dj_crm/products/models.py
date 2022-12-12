@@ -1,5 +1,6 @@
 import uuid
 from django.db import models
+from customers.models import Customer
 
 # Create your models here.
 class Brand(models.Model):
@@ -32,3 +33,19 @@ class Product(models.Model):
 
     def __str__(self) -> str:
         return self.name
+
+
+class Order(models.Model):
+    STATUS_OPTIONS = [
+        ('ordered', 'Ordered'),
+        ('outfordelivery', 'Out For Delivery'),
+        ('delivered', 'Delivered')
+    ]
+    customer = models.ForeignKey(Customer, on_delete=models.CASCADE)
+    product = models.ForeignKey(Product, on_delete=models.SET_NULL, null=True)
+    status = models.CharField(max_length=100, choices=STATUS_OPTIONS)
+    created_at = models.DateTimeField(auto_now_add=True)
+    id = models.UUIDField(primary_key=True, unique=True, default=uuid.uuid4, editable=False)
+
+    def __str__(self) -> str:
+        return self.product.name

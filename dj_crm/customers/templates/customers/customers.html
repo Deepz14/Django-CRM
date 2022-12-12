@@ -1,0 +1,52 @@
+{% extends 'index.html' %}
+
+{% block content %}
+    <div class="container-fluid">
+        <h3 class="mt-4">Customers</h3>
+        <div class="row">
+            <div class="col">
+                <div class="card mb-4">
+                    <div class="card-header">
+                        <span>
+                            <i class="fas fa-box me-1"></i>
+                                Customers List
+                        </span>    
+                       <a class="btn btn-sm btn-primary" href="#">
+                            <i class="fas fa-plus me-1"></i>
+                               Add Customer</a>
+                    </div>
+                    <div class="card-body">
+                        <div class="table-responsive table-responsive-md">
+                            <table id="datatablesSimple" class="table table-bordered table-striped">
+                                <thead>
+                                    <tr>
+                                        <th>Name</th>
+                                        <th>Email</th>
+                                        <th>Phone No</th>
+                                        <th>Address</th>
+                                        <th></th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    {% for cust in cutomers %}
+                                    <tr>
+                                        <td><a href="#">{{cust.name}}</a></td>
+                                        <td>{{cust.email}}</td>
+                                        <td>{{cust.phoneNo}}</td>
+                                        <td>{{cust.address}}</td>
+                                        <td>
+                                            <a class="btn btn-sm btn-danger" href="#"> <i class="fas fa-trash"></i></a>
+                                        </td>
+                                    </tr>
+                                    {% endfor %}
+                                </tbody>
+                        
+                            </table>
+                        </div>
+                       
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}
