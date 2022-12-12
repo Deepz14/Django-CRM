@@ -7,7 +7,7 @@
         <div class="col">
             <div class="card mb-4">
                 <div class="card-header">
-                    <a class="btn btn-sm btn-secondary" href="{% url 'product-List' %}">
+                    <a class="btn btn-sm btn-secondary" href="{{request.META.HTTP_REFERER}}">
                         <i class="fas fa-angle-left me-1"></i>
                         Back
                     </a>    

@@ -8,9 +8,9 @@ class ProductForm(ModelForm):
         model = Product
         fields = ['name', 'price', 'description', 'category', 'brand', 'stock']
         widgets={
-            'name':forms.TextInput(attrs={'class':'form-control','placeholder':'Enter a name'}),
-            'price':forms.TextInput(attrs={'class':'form-control', 'placeholder':'Enter a price'}),
-            'description':forms.Textarea(attrs={'class':'form-control','placeholder':'Enter a description'}),
+            'name':forms.TextInput(attrs={'class':'form-control','placeholder':'Enter a name', 'autocomplete': 'off'}),
+            'price':forms.TextInput(attrs={'class':'form-control', 'placeholder':'Enter a price', 'autocomplete': 'off'}),
+            'description':forms.Textarea(attrs={'class':'form-control','placeholder':'Enter a description', 'autocomplete': 'off'}),
             'brand':forms.Select(attrs={'class':'form-control'}),
             'category': forms.CheckboxSelectMultiple()
         } 

@@ -8,10 +8,10 @@
                 <div class="card mb-4">
                     <div class="card-header">
                         <span>
-                            <i class="fas fa-box me-1"></i>
+                            <i class="fas fa-user-alt me-1"></i>
                                 Customers List
                         </span>    
-                       <a class="btn btn-sm btn-primary" href="#">
+                       <a class="btn btn-sm btn-primary" href="{% url 'add-customer' %}">
                             <i class="fas fa-plus me-1"></i>
                                Add Customer</a>
                     </div>
@@ -30,7 +30,7 @@
                                 <tbody>
                                     {% for cust in cutomers %}
                                     <tr>
-                                        <td><a href="#">{{cust.name}}</a></td>
+                                        <td><a href="{% url 'view-customer' cust.id %}">{{cust.name}}</a></td>
                                         <td>{{cust.email}}</td>
                                         <td>{{cust.phoneNo}}</td>
                                         <td>{{cust.address}}</td>
