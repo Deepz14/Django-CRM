@@ -1,4 +1,5 @@
 from django.shortcuts import render, redirect
+from django.contrib.auth.decorators import login_required
 from django.contrib import messages
 from . forms import ProductForm
 from . models import Product
@@ -9,6 +10,7 @@ def productsList(request):
     context = {'products': products}
     return render(request, 'products/products.html', context)
 
+@login_required(login_url='login')
 def createProduct(request):
     if request.method == "POST":
         form = ProductForm(request.POST)
@@ -26,7 +28,8 @@ def viewProduct(request, pk):
     category = product.category.all()
     context = {'product': product, 'categorys': category}
     return render(request, 'products/product_detail.html', context)
-
+    
+@login_required(login_url='login')
 def deleteProduct(request, pk):
     product = Product.objects.get(id=pk)
     if request.method == "POST":
