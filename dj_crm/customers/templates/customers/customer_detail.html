@@ -7,7 +7,7 @@
         <div class="col">
             <div class="card mb-3">
                 <div class="card-header">
-                    <a class="btn btn-sm btn-secondary" href="{{request.META.HTTP_REFERER}}">
+                    <a class="btn btn-sm btn-secondary" href="{% url 'product-List' %}">
                         <i class="fas fa-angle-left me-1"></i>
                         Back
                     </a>    
@@ -39,6 +39,7 @@
                                         <th>Price</th>
                                         <th>Status</th>
                                         <th>Address</th>
+                                        <th></th>
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -49,6 +50,17 @@
                                         <td>{{order.product.price}}</td>
                                         <td>{{order.status}}</td>
                                         <td>{{order.customer.address}}</td>
+                                        <td>
+                                            {% if order.status == 'delivered' %}
+                                            <a class="btn btn-sm btn-warning mr-2" href="{% url 'delete-order' order.id %}?ord_status=return">
+                                                Return
+                                            </a>
+                                            {% else %}
+                                            <a class="btn btn-sm btn-outline-danger mr-2" href="{% url 'delete-order' order.id %}?ord_status=cancel">
+                                                Cancel
+                                            </a>
+                                            {% endif %}
+                                        </td>
                                     </tr>
                                     {% endfor %}
                                 </tbody>

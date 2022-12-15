@@ -1,0 +1,36 @@
+{% extends 'index.html' %}
+
+{% block content %}
+<div class="container">
+    <h3 class="mt-4">
+        {% if request.GET.ord_status == 'cancel' %}
+            Cancel Order
+        {% else %}
+            Return Order    
+        {% endif %}
+    </h3>
+    <div class="row">
+        <div class="col">
+            <div class="card mb-3">
+                <div class="card-header">
+                    <a class="btn btn-sm btn-secondary" href="{{request.META.HTTP_REFERER}}">
+                        <i class="fas fa-angle-left me-1"></i>
+                        Back
+                    </a>    
+                </div>
+                <div class="card-body">
+                    <form action="{% url 'delete-order' obj.id %}" method="POST">
+                        {% csrf_token %}
+                            {% if request.GET.ord_status == 'cancel' %}
+                                <p> Are you sure you want to cancel ? {{obj}}</p>
+                            {% else %}
+                                <p> Are you sure you want to return ? {{obj}}</p>
+                            {% endif %}
+                        <input class="btn btn-sm btn-danger" type="submit" value="Confirm" />
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
