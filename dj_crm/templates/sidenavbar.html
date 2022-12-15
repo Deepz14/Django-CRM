@@ -17,7 +17,7 @@
                         <div class="sb-nav-link-icon"><i class="fas fa-user-alt"></i></div>
                         Customers
                     </a>
-                    <a class="nav-link" href="#">
+                    <a class="nav-link {% if request.resolver_match.view_name == 'order-List' %} active {% endif %}" href="{% url 'order-List' %}">
                         <div class="sb-nav-link-icon"><i class="fas fa-cart-shopping"></i></div>
                         Orders
                     </a>
