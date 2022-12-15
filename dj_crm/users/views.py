@@ -5,6 +5,8 @@ from django.contrib.auth.models import User
 from . forms import CustomUserCreationForm
 
 def register(request):
+    if request.user.is_authenticated:
+        return redirect('product-List')
     form = CustomUserCreationForm()
     if request.method == "POST":
         form = CustomUserCreationForm(request.POST)
@@ -21,6 +23,8 @@ def register(request):
     return render(request, 'users/register.html', context)
 
 def login_page(request):
+    if request.user.is_authenticated:
+        return redirect('product-List')
     form = CustomUserCreationForm()
     if request.method == "POST":
         email = request.POST['email']
@@ -31,6 +35,7 @@ def login_page(request):
             return HttpResponseBadRequest('User not exist') 
         user = authenticate(request, username=login_user, password=password)
         if user is not None:
+            print('user', user)
             login(request, user)
             return redirect('product-List')
         else:

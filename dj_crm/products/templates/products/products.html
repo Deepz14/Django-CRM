@@ -36,9 +36,13 @@
                                         <td><a href="{% url 'view-product' prd.id %}">{{prd.name}}</a></td>
                                         <td>&#8377; {{prd.price}}</td>
                                         <td>{{prd.brand}}</td>
-                                        <td>{{prd.stock}}</td>
+                                        {% if prd.stock > 0 %}
+                                        <td><span class="text-success">{{prd.stock}}</span></td>
+                                        {% else %}
+                                        <td><span class="text-danger">{{prd.stock}}</span></td>
+                                        {% endif %}
                                         <td>
-                                            <a class="btn btn-sm btn-danger" href="{% url 'delete-product' prd.id %}"> <i class="fas fa-trash"></i></a>
+                                            <a href="{% url 'delete-product' prd.id %}"> <i class="fas fa-trash text-danger"></i></a>
                                         </td>
                                     </tr>
                                     {% endfor %}

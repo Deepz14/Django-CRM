@@ -23,7 +23,11 @@
                     <div>
                         <p>{{product.description}}</p>
                         <h4 class="text-warning">&#8377; {{product.price}}</h4>
-                        <p>Stock: {{product.stock}}</p>
+                        {% if product.stock > 0 %}
+                        <p>Stock: <span class="text-success">{{product.stock}} (available)</span></p>
+                        {% else %}
+                        <p>Stock: <span class="text-danger">{{product.stock}} (low stock)</span></p>
+                        {% endif %}
                     </div>
                 </div>
             </div>
