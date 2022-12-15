@@ -42,6 +42,7 @@
                                         <td><span class="text-danger">{{prd.stock}}</span></td>
                                         {% endif %}
                                         <td>
+                                            <a class="mr-2" href="{% url 'edit-product' prd.id %}"> <i class="fas fa-edit text-primary"></i></a>
                                             <a href="{% url 'delete-product' prd.id %}"> <i class="fas fa-trash text-danger"></i></a>
                                         </td>
                                     </tr>

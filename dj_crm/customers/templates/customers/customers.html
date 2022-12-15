@@ -35,7 +35,8 @@
                                         <td>{{cust.phoneNo}}</td>
                                         <td>{{cust.address}}</td>
                                         <td>
-                                            <a href="#"> <i class="fas fa-trash text-danger"></i></a>
+                                            <a class="mr-2" href="{% url 'edit-customer' cust.id %}"> <i class="fas fa-edit text-primary"></i></a>
+                                            <a href="{% url 'delete-customer' cust.id %}"> <i class="fas fa-trash text-danger"></i></a>
                                         </td>
                                     </tr>
                                     {% endfor %}
