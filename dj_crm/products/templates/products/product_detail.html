@@ -29,6 +29,11 @@
                         <p>Stock: <span class="text-danger">{{product.stock}} (low stock)</span></p>
                         {% endif %}
                     </div>
+                    <div>
+                        {% if product.stock > 0 %}
+                        <a class="btn btn-primary" href="{% url 'create-order' product.id %}">Buy Now</a>
+                        {% endif %}
+                    </div>
                 </div>
             </div>
         </div>

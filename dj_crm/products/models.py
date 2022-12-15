@@ -31,6 +31,12 @@ class Product(models.Model):
     created_at = models.DateTimeField(auto_now_add=True)
     id = models.UUIDField(primary_key=True, unique=True, default=uuid.uuid4, editable=False)
 
+    @property
+    def stock_update(self):
+        self.stock -= 1
+        self.save()
+
+
     def __str__(self) -> str:
         return self.name
 

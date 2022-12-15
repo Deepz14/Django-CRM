@@ -51,6 +51,7 @@
                                         <td>{{order.status}}</td>
                                         <td>{{order.customer.address}}</td>
                                         <td>
+                                            <a class="mr-2" href="{% url 'edit-order' order.id %}"> <i class="fas fa-edit text-primary"></i></a>
                                             {% if order.status == 'delivered' %}
                                             <a class="btn btn-sm btn-warning mr-2" href="{% url 'delete-order' order.id %}?ord_status=return">
                                                 Return
