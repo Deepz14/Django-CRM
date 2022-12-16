@@ -25,50 +25,24 @@
                                     <div class="card-body">
                                         <form action="{% url 'register' %}" method="POST">
                                             {% csrf_token %}
-                                            <div class="row mb-3">
-                                                <div class="col-md-6">
-                                                    <div class="form-floating mb-3 mb-md-0">
-                                                        {{form.first_name}}
-                                                        <label>{{form.first_name.label}}</label>
-                                                    </div>
-                                                </div>
-                                                <div class="col-md-6">
-                                                    <div class="form-floating">
-                                                        {{form.last_name}}
-                                                        <label>{{form.last_name.label}}</label>
-                                                    </div>
-                                                </div>
+                                            <div class="form-floating mb-3">
+                                                <input class="form-control" name="email" type="email" placeholder="Email Address" />
+                                                <label for="inputEmail">{{form.email.label}}</label>
                                             </div>
-                                            <div class="row mb-3">
-                                                <div class="col-md-6">
-                                                    <div class="form-floating mb-3 mb-md-0">
-                                                        {{form.username}}
-                                                        <label>{{form.username.label}}</label>
-                                                    </div>
-                                                </div>
-                                                <div class="col-md-6">
-                                                    <div class="form-floating">
-                                                        {{form.email}}
-                                                        <label>{{form.email.label}}</label>
-                                                    </div>
-                                                </div>
+                                            <div class="form-floating mb-3">
+                                                <input class="form-control" name="full_name" type="text" placeholder="Name" />
+                                                <label for="inputEmail">{{form.full_name.label}}</label>
                                             </div>
-                                            <div class="row mb-3">
-                                                <div class="col-md-6">
-                                                    <div class="form-floating mb-3">
-                                                        {{form.password1}}
-                                                        <label>{{form.password1.label}}</label>
-                                                    </div>
-                                                 </div>
-                                                <div class="col-md-6">
-                                                    <div class="form-floating mb-3">
-                                                        {{form.password2}}
-                                                        <label>{{form.password2.label}}</label>
-                                                    </div>
-                                                 </div>
-                                            </div>   
+                                            <div class="form-floating mb-3">
+                                                <input class="form-control" name="password1" type="password" placeholder="Password" />
+                                                <label for="inputPassword">{{form.password1.label}}</label>
+                                            </div>
+                                            <div class="form-floating mb-3">
+                                                <input class="form-control" name="password2" type="password" placeholder="Confirm Password" />
+                                                <label for="inputPassword">{{form.password2.label}}</label>
+                                            </div>
                                             <div class="mt-4 mb-0">
-                                                <div class="d-grid"><input class="btn btn-primary btn-block" type="submit" value="Create Account" /></div>
+                                               <input class="btn btn-primary btn-block" type="submit" value="Create Account" />
                                             </div>
                                         </form>
                                     </div>
