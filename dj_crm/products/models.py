@@ -1,6 +1,9 @@
 import uuid
 from django.db import models
 from customers.models import Customer
+from django.contrib.auth import get_user_model
+
+User = get_user_model()
 
 # Create your models here.
 class Brand(models.Model):
@@ -20,6 +23,7 @@ class Category(models.Model):
         return self.name  
 
 class Product(models.Model):
+    owner = models.ForeignKey(User, on_delete=models.CASCADE, null=True, blank=True)
     name = models.CharField(max_length=100)
     price = models.DecimalField(max_digits=8, decimal_places=2)
     description = models.TextField(max_length=200, null=True, blank=True)
