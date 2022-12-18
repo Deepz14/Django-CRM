@@ -21,7 +21,7 @@ def register(request):
             login(request, user)
             return redirect('product-List')
         else:
-            return HttpResponseBadRequest('Bad Request')    
+            return render(request, 'accounts/register.html', {'form': form})   
     form = RegisterForm()
     context = {'form': form}
     return render(request, 'accounts/register.html', context)

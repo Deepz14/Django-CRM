@@ -18,18 +18,26 @@ class RegisterForm(forms.ModelForm):
         super(RegisterForm, self).__init__(*args, **kwargs)
 
         for name, field in self.fields.items():
-            field.widget.attrs.update({'class': 'form-control', 'autocomplete': 'off'})    
+            field.widget.attrs.update({'class': 'form-control', 'autocomplete': 'off'})  
 
-    # def clean(self):
-    #     '''
-    #     Verify both passwords match.
-    #     '''
-    #     cleaned_data = super().clean()
-    #     password = cleaned_data.get("password1")
-    #     password_2 = cleaned_data.get("password2")
-    #     if password is not None and password != password_2:
-    #         self.add_error("password2", "Your passwords must match")
-    #     return cleaned_data
+    def clean_email(self):
+        ''' Verify email is available '''
+        email = self.cleaned_data.get('email')
+        qs = User.objects.filter(email=email)
+        if qs.exists():
+            raise forms.ValidationError('User already exists')
+        return email            
+
+    def clean(self):
+        '''
+        Verify both passwords match.
+        '''
+        cleaned_data = super().clean()
+        password = cleaned_data.get("password1")
+        password_2 = cleaned_data.get("password2")
+        if password is not None and password != password_2:
+            self.add_error("password2", "Your passwords must match")
+        return cleaned_data
 
     # def save(self, commit=True):
     #     # Save the provided password in hashed format
@@ -41,7 +49,6 @@ class RegisterForm(forms.ModelForm):
     #     return user   
 
 class LoginUserForm(forms.ModelForm):
-
     password1 = forms.CharField(label='Password', widget=forms.PasswordInput)
 
     class Meta:
@@ -57,10 +64,10 @@ class LoginUserForm(forms.ModelForm):
     # def clean_email(self):
     #     ''' Verify email is available '''
     #     email = self.cleaned_data.get('email')
-    #     qs = User.objects.get(email=email)
-    #     if qs is None:
-    #         raise forms.ValidationError('User not exist')
-    #     return email           
+    #     qs = User.objects.filter(email=email)
+    #     if not qs:
+    #         raise forms.ValidationError('User not exists.')
+    #     return email       
 
 class UserAdminCreationForm(forms.ModelForm):
     """
